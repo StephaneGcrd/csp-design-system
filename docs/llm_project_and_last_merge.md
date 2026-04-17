@@ -24,6 +24,7 @@ Le guide newsletter centralise:
 - Langage: `TypeScript`
 - Styles: `Tailwind CSS v4`
 - Lint: `ESLint 9` via `eslint-config-next`
+- Typographie display: **Fern** (DJR) en `next/font/local` depuis `app/fonts/fern/*.woff2` (variable roman + italique), branchee sur `--font-display` / utilitaire Tailwind `font-display` (remplace l'ancien chargement Google **Fraunces**).
 
 ### Structure utile
 - `app/page.tsx`: redirection vers `/brand/{slug}` du guide par defaut.
@@ -34,6 +35,10 @@ Le guide newsletter centralise:
 - `components/systems/DesignSystemShell.tsx`: shell partage (layout + nav desktop/mobile).
 - `components/systems/DesignSystemNav.tsx`: navigation laterale groupee (sections **Brand** / **Systems** selon `navSection`).
 - `components/brand/*`: pages guide marque (`BrandPlatformGuidePage`, `BrandCharterGuidePage`, `BrandGuideIntro`).
+- `components/brand/BrandPlatformGuidePage.tsx`: intro + **moodboard** (image `public/brands/comptoir-sud-pacifique/moodboard-plateforme-marque.png`, `next/image`, contrainte hauteur desktop) + section Manifeste longue + `ManifesteGallery`.
+- `app/layout.tsx`: `Plus_Jakarta_Sans`, `Geist_Mono`, **Fern** (`localFont`, variable `--font-fern-display`); Typekit optionnel (`NEXT_PUBLIC_ENABLE_TYPEKIT`).
+- `app/fonts/fern/`: fichiers WOFF2 Fern (display) versionnes avec le repo.
+- `app/globals.css`: `@theme inline` inclut `--font-display: var(--font-fern-display), …` pour `font-display`.
 - `components/brand/ManifesteGallery.tsx`: grilles d'images du Manifeste (placeholders si dossier vide); region nommee (`role="region"`, `aria-labelledby`).
 - `lib/getManifesteGalleryImages.ts`: lecture **serveur uniquement** des fichiers image sous `public/brands/comptoir-sud-pacifique/manifeste/{section}/` (slug valide requis, pas de traversal).
 - `public/brands/comptoir-sud-pacifique/manifeste/*`: assets JPEG/PNG par theme (`minimalisme`, `dessin`, `ligne-chemin`, `postal`, `sensorialite`, `voyage-exotisme`, etc.).
@@ -50,6 +55,7 @@ Le guide newsletter centralise:
 ### Intention de design
 Le systeme vise une coherence editoriale et visuelle entre les emails marketing:
 - identite majoritairement porte par `blue-primary`,
+- titres / accroches display en **Fern** (`font-display`), corps UI en sans (tokens `--font-geist-sans`), corps editorial marketing optionnellement **Freight Neo** via Typekit si active,
 - composants simples et reproductibles,
 - lisibilite prioritaire (desktop + mobile),
 - standardisation des règles pour l'equipe Marketing.
@@ -113,7 +119,8 @@ Le commit est principalement une **normalisation editoriale et visuelle**:
   - fermeture au clavier (`Escape`),
   - verrouillage du scroll de fond pendant ouverture.
 - Les icones ne sont plus affichees dans les items de la side nav (navigation texte uniquement); `iconClass` reste dans le registry pour usage futur.
-- **Plateforme de marque — Manifeste**: la page `plateforme-de-marque` inclut le texte long du manifeste et des **galeries** par theme. Les URLs d'images sont derivees du disque au rendu (Server Component); ajouter des fichiers dans le sous-dossier `public/.../manifeste/{slug}/` les affiche automatiquement (tri naturel sur le nom de fichier). Le prop `section` de `ManifesteGallery` doit etre un **slug seul** (`a-z`, `0-9`, tirets), aligne sur le nom du dossier.
+- **Plateforme de marque — Manifeste**: la page `plateforme-de-marque` inclut un **moodboard** en tete de contenu (apres `BrandGuideIntro`), le texte long du manifeste et des **galeries** par theme. Les URLs d'images des galeries sont derivees du disque au rendu (Server Component); ajouter des fichiers dans le sous-dossier `public/.../manifeste/{slug}/` les affiche automatiquement (tri naturel sur le nom de fichier). Le prop `section` de `ManifesteGallery` doit etre un **slug seul** (`a-z`, `0-9`, tirets), aligne sur le nom du dossier.
+- **Typographie display**: plus de `Fraunces` Google; Fern local + fallbacks systeme dans `globals.css`. Ne pas reintroduire un second chargement display sans coordination (perf + licence).
 
 ### Risques/points d'attention
 - Le passage systematique vers `text-blue-primary` reduit la variation de contraste; verifier accessibilite/hiérarchie visuelle sur certains blocs.
@@ -146,7 +153,8 @@ Le produit est une plateforme de marque + hub de guides: routing canonique /bran
 Le coeur contenu reste le guide newsletter dans components/newsletter; les guides marque vivent dans components/brand.
 Priorites: fiabilite de navigation, coherence visuelle, lisibilite FR, et respect des règles de design documentees.
 Le dernier commit (cfb5636) a harmonise les textes FR, les accents, et les classes de couleur vers text-blue-primary, et a ajoute des règles d'alignement typographique.
-La plateforme de marque inclut le Manifeste avec galeries (`ManifesteGallery` + `getManifesteSectionImageUrls`); images sous public/brands/comptoir-sud-pacifique/manifeste/{slug}/, slug alphanumerique avec tirets uniquement.
+La plateforme de marque inclut un moodboard (PNG sous public/brands/comptoir-sud-pacifique/), le Manifeste avec galeries (`ManifesteGallery` + `getManifesteSectionImageUrls`); images sous public/brands/comptoir-sud-pacifique/manifeste/{slug}/, slug alphanumerique avec tirets uniquement.
+Les titres display utilisent Fern (next/font/local, app/fonts/fern), token Tailwind font-display / --font-display — pas Fraunces.
 Ne reintroduis pas text-ink/text-ink-soft sauf validation explicite.
 Propose des modifications minimales, compatibles desktop/mobile, et explique l'impact UX/editorial.
 ```

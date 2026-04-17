@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Fraunces, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
+import { Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import "remixicon/fonts/remixicon.css";
 
@@ -13,9 +14,22 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
+const fernDisplay = localFont({
+  src: [
+    {
+      path: "./fonts/fern/FernVariable-Roman-VF.woff2",
+      style: "normal",
+      weight: "100 900",
+    },
+    {
+      path: "./fonts/fern/FernVariable-Italic-VF.woff2",
+      style: "italic",
+      weight: "100 900",
+    },
+  ],
+  variable: "--font-fern-display",
+  display: "swap",
+  fallback: ["Georgia", "Times New Roman", "serif"],
 });
 
 export const metadata: Metadata = {
@@ -34,7 +48,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakartaSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
+      className={`${plusJakartaSans.variable} ${geistMono.variable} ${fernDisplay.variable} h-full antialiased`}
     >
       <head>
         {useTypekit ? (

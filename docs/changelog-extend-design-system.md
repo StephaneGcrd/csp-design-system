@@ -1,6 +1,6 @@
 # Changelog - `extend-design-system` branch
 
-Date: 2026-04-17 (updated for Brand Platform routing + manifeste galleries)
+Date: 2026-04-17 (updated for Brand Platform routing, manifeste galleries, Fern display type, moodboard)
 
 ## Overview
 
@@ -9,7 +9,8 @@ This branch evolves the app from a single newsletter-focused page into a modular
 - a shared shell and side navigation,
 - **canonical dynamic routing under `/brand/[system]`** (registry slug; `/systems/[system]` redirects for compatibility),
 - **brand** guides (`plateforme-de-marque`, `charte-graphique`) and **systems** guides (`newsletter`, `web`) distinguished in config via `navSection`,
-- **brand platform manifeste** long-form copy plus theme-based image galleries fed from `public/brands/comptoir-sud-pacifique/manifeste/`,
+- **brand platform manifeste** long-form copy, a **moodboard** image block, plus theme-based image galleries fed from `public/brands/comptoir-sud-pacifique/manifeste/`,
+- **Fern** (local `woff2`) for display typography via `font-display` / `--font-display` (replacing Google Fraunces in the app shell),
 - a first additional `web` guide placeholder,
 - visual and copy updates for multi-system / brand-platform positioning,
 - Remix Icon integration for global UI usage.
@@ -55,6 +56,26 @@ This branch evolves the app from a single newsletter-focused page into a modular
 
 - `ManifesteGallery` must stay a **Server Component** (or be composed only from server-safe parents) so `getManifesteSectionImageUrls` can use Node `fs`.
 - Adding or replacing files in a theme folder updates the page on the next build/deploy without code changes.
+
+---
+
+## 2026-04-17 — Display type: Fern (local) + brand platform moodboard
+
+### Added
+
+- **`app/fonts/fern/`** — `FernVariable-Roman-VF.woff2` and `FernVariable-Italic-VF.woff2` (DJR Fern webfont bundle; keep licensing terms with your font vendor).
+- **`public/brands/comptoir-sud-pacifique/moodboard-plateforme-marque.png`** — moodboard image for the brand platform guide.
+- **`BrandPlatformMoodboard`** (in `components/brand/BrandPlatformGuidePage.tsx`) — section above the Manifeste article; uses `next/image` with a desktop max height constraint for the moodboard strip.
+
+### Changed
+
+- **`app/layout.tsx`** — display font: `next/font/local` Fern instead of Google **Fraunces**; CSS variable `--font-fern-display` on `<html>`.
+- **`app/globals.css`** — `--font-display` now references `var(--font-fern-display)` with system serif fallbacks.
+
+### Notes
+
+- Tailwind **`font-display`** maps to `--font-display` (brand guide titles, newsletter display headings, etc.).
+- **Typekit** (`NEXT_PUBLIC_ENABLE_TYPEKIT`) is unchanged for optional Freight Neo body styling.
 
 ## Added
 

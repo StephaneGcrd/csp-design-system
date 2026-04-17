@@ -29,7 +29,7 @@
   --color-ink-soft: var(--ink-soft);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-fraunces);
+  --font-display: var(--font-fern-display), Georgia, "Times New Roman", serif;
 }
 
 body {
