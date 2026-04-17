@@ -22,17 +22,17 @@ export type AnatomyItem = {
 export const paletteColors: PaletteColor[] = [
   { name: "blue-primary", hex: "#067290", textColor: "text-white" },
   { name: "blue-light", hex: "#E7F4F7", textColor: "text-blue-primary" },
-  { name: "off-white", hex: "#F7F6F1", textColor: "text-ink" },
+  { name: "off-white", hex: "#F7F6F1", textColor: "text-blue-primary" },
   {
     name: "white",
     hex: "#FFFFFF",
-    textColor: "text-ink",
+    textColor: "text-blue-primary",
     extraClassName: "border-b border-blue-primary/10",
   },
 ];
 
 export const spacingScale: SpacingItem[] = [
-  { label: "8px", widthPercent: "1.56%", usage: "icone · gap serre" },
+  { label: "8px", widthPercent: "1.56%", usage: "icône · gap serré" },
   { label: "16px", widthPercent: "3.12%", usage: "padding composant" },
   { label: "32px", widthPercent: "6.25%", usage: "padding bloc" },
   { label: "64px", widthPercent: "12.5%", usage: "entre sections" },
@@ -50,7 +50,7 @@ export const anatomyItems: AnatomyItem[] = [
     rules: [
       "Logo + navbar, fond blue-primary ou blanc",
       "Logo max-height: 128px",
-      "Hauteur respectant l'echelle d'espacement",
+      "Hauteur respectant l'échelle d'espacement",
     ],
   },
   {
@@ -62,7 +62,7 @@ export const anatomyItems: AnatomyItem[] = [
     rules: [
       "Toujours cliquable",
       "Avec ou sans accroche textuelle",
-      "Fleche ou indice UI pour signaler la clickabilite",
+      "Flèche ou indice UI pour signaler la cliquabilité",
     ],
   },
   {
@@ -84,8 +84,8 @@ export const anatomyItems: AnatomyItem[] = [
     rules: [
       "Wildcards: nom seul, pas de prix",
       "Chaque wildcard renvoie vers une fiche produit",
-      "Preferer fonds clairs + packshots",
-      "Combinaisons texte/image autorisees avec CTA",
+      "Préférer fonds clairs + packshots",
+      "Combinaisons texte/image autorisées avec CTA",
     ],
   },
   {
@@ -95,7 +95,7 @@ export const anatomyItems: AnatomyItem[] = [
     title: "Bloc reassurance",
     rules: [
       "Comme sur le site (livraison offerte, etc.)",
-      "Icones: max-height 96px",
+      "Icônes: max-height 96px",
       "Typographie conforme au DS",
     ],
   },
@@ -117,7 +117,7 @@ export const anatomyItems: AnatomyItem[] = [
     rules: [
       "Deux colonnes desktop, une sur mobile",
       "Texte blanc sur fond blue-primary",
-      "Gauche: logo, adresse, reseaux",
+      "Gauche: logo, adresse, réseaux",
       "Droite: contact + boutique + copyright",
     ],
   },

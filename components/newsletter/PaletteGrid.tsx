@@ -32,10 +32,10 @@ export function PaletteGrid() {
             <span className="text-xs font-medium">cliquer pour copier</span>
           </div>
           <div className="flex items-baseline justify-between gap-2 p-4">
-            <span className="text-sm font-semibold text-ink">{item.name}</span>
-            <span className="font-mono text-xs tracking-wide text-ink-soft">
+            <span className="text-sm font-semibold text-blue-primary">{item.name}</span>
+            <span className="font-mono text-xs tracking-wide text-blue-primary">
               {item.hex}
-              {copiedHex === item.hex ? " · copie" : ""}
+              {copiedHex === item.hex ? " · copié" : ""}
             </span>
           </div>
         </button>

@@ -18,10 +18,10 @@ export function SectionHeader({
           {number}
         </div>
         <div>
-          <h2 className="font-display mb-4 text-4xl leading-tight tracking-tight text-ink sm:text-5xl">
+          <h2 className="font-display mb-4 text-4xl leading-tight tracking-tight text-blue-primary sm:text-5xl">
             {title}
           </h2>
-          <p className="max-w-2xl text-base leading-relaxed text-ink-soft">
+          <p className="max-w-2xl text-base leading-relaxed text-blue-primary">
             {description}
           </p>
         </div>

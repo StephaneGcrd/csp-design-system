@@ -57,7 +57,7 @@ export function ExampleNewsletter() {
 
         <a
           href="#collection-solaire"
-          aria-label="Decouvrir la collection solaire"
+          aria-label="Découvrir la collection solaire"
           className="relative flex aspect-[16/10] items-end bg-linear-to-br from-blue-light to-blue-primary p-6 text-xs font-medium tracking-widest text-white uppercase transition hover:brightness-105 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
         >
           LA COLLECTION SOLAIRE · PRINTEMPS 2026
@@ -67,18 +67,18 @@ export function ExampleNewsletter() {
         </a>
 
         <div className="px-8 pt-12 pb-8 text-center">
-          <h3 className="mb-4 text-xl leading-snug font-bold text-ink">
+          <h3 className="mb-4 text-xl leading-snug font-bold text-blue-primary">
             Un souffle de Pacifique dans votre parfumerie
           </h3>
-          <p className="mx-auto mb-6 max-w-md text-base leading-relaxed text-ink-soft">
+          <p className="mx-auto mb-6 max-w-md text-base leading-relaxed text-blue-primary">
             Trois nouvelles fragrances pour accompagner le retour du soleil.
-            Aloha Tiare, Vanille Extreme et Aqua Motu vous attendent.
+            Aloha Tiaré, Vanille Extrême et Aqua Motu vous attendent.
           </p>
           <a
             href="#collection-solaire"
             className="inline-block bg-blue-primary px-6 py-3 text-sm font-medium text-white"
           >
-            Decouvrir la collection
+            Découvrir la collection
           </a>
         </div>
 
@@ -94,7 +94,7 @@ export function ExampleNewsletter() {
                   {name.split(" ")[0]}
                 </div>
               </div>
-              <div className="text-sm font-medium text-ink">{name}</div>
+              <div className="text-sm font-medium text-blue-primary">{name}</div>
             </div>
           ))}
         </div>
@@ -102,9 +102,9 @@ export function ExampleNewsletter() {
         <div className="grid bg-white md:grid-cols-2">
           <div className="h-full min-h-64 bg-linear-to-br from-off-white to-blue-light" />
           <div className="flex flex-col justify-center gap-4 px-8 py-8">
-            <h4 className="text-lg font-bold text-ink">L&apos;art du sillage solaire</h4>
-            <p className="text-base leading-relaxed text-ink-soft">
-              Notre parfumeuse Eleonore a voyage dans les iles du Pacifique pour
+            <h4 className="text-lg font-bold text-blue-primary">L&apos;art du sillage solaire</h4>
+            <p className="text-base leading-relaxed text-blue-primary">
+              Notre parfumeuse Éléonore a voyagé dans les îles du Pacifique pour
               capturer l&apos;essence de cette collection.
             </p>
             <a href="#journal-solaire" className="text-left text-blue-primary underline">
@@ -120,10 +120,10 @@ export function ExampleNewsletter() {
         >
           {[
             "Livraison offerte des 80EUR",
-            "Echantillons offerts",
-            "Fabrique en France",
+            "Échantillons offerts",
+            "Fabriqué en France",
           ].map((item) => (
-            <div key={item} className="text-sm text-ink">
+            <div key={item} className="text-sm text-blue-primary">
               <div className="mb-2 text-3xl text-blue-primary">✦</div>
               <p>{item}</p>
             </div>
@@ -138,9 +138,9 @@ export function ExampleNewsletter() {
             height={42}
             className="mx-auto mb-6 h-10 w-auto"
           />
-          <p className="mx-auto max-w-xl text-base leading-relaxed text-ink">
-            Depuis 1974, Comptoir Sud Pacifique celebre l&apos;esprit du voyage a
-            travers des parfums inspires des confins du monde.
+          <p className="mx-auto max-w-xl text-base leading-relaxed text-blue-primary">
+            Depuis 1974, Comptoir Sud Pacifique célèbre l&apos;esprit du voyage à
+            travers des parfums inspirés des confins du monde.
           </p>
         </div>
 
@@ -155,7 +155,7 @@ export function ExampleNewsletter() {
             </div>
             <strong>Comptoir Sud Pacifique</strong>
             <br />
-            34 Place du Marche Saint-Honore
+            34 Place du Marché Saint-Honoré
             <br />
             75001 Paris
           </div>

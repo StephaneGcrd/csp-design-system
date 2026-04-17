@@ -37,8 +37,8 @@ export function AnatomyMap() {
               activeId === item.id ? "bg-blue-light" : ""
             }`}
           >
-            <h4 className="font-display mb-2 text-2xl text-ink">{item.title}</h4>
-            <ul className="space-y-1 text-sm leading-relaxed text-ink-soft">
+            <h4 className="font-display mb-2 text-2xl text-blue-primary">{item.title}</h4>
+            <ul className="space-y-1 text-sm leading-relaxed text-blue-primary">
               {item.rules.map((rule) => (
                 <li key={rule}>→ {rule}</li>
               ))}
