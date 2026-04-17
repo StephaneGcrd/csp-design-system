@@ -36,10 +36,6 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family:
-    "freight-neo-pro",
-    "freight-neo-pro-condensed",
-    var(--font-geist-sans),
-    Arial,
-    Helvetica,
-    sans-serif;
+    "freight-neo-pro", "freight-neo-pro-condensed", var(--font-geist-sans),
+    Arial, Helvetica, sans-serif;
 }

@@ -24,7 +24,9 @@ Registered slugs include brand sections (`plateforme-de-marque`, `charte-graphiq
 - `components/systems/designSystems.tsx` — typed registry, `navSection` (`brand` \| `systems`), slug resolution.
 - `components/systems/DesignSystemShell.tsx` — layout + mobile drawer.
 - `components/systems/DesignSystemNav.tsx` — side nav grouped by `navSection`.
-- `components/brand/` — brand guide pages (`BrandPlatformGuidePage`, `BrandCharterGuidePage`, shared `BrandGuideIntro`).
+- `components/brand/` — brand guide pages (`BrandPlatformGuidePage`, `BrandCharterGuidePage`, shared `BrandGuideIntro`, `ManifesteGallery` for manifeste image grids).
+- `lib/getManifesteGalleryImages.ts` — server-only listing of images under `public/brands/comptoir-sud-pacifique/manifeste/{section}/` (safe slug; used by `ManifesteGallery`).
+- `public/brands/comptoir-sud-pacifique/manifeste/` — on-disk image assets per manifeste theme (wired to the brand platform guide).
 - `components/newsletter/` — newsletter guide content and data.
 
 ## Scripts

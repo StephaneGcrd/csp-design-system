@@ -34,6 +34,9 @@ Le guide newsletter centralise:
 - `components/systems/DesignSystemShell.tsx`: shell partage (layout + nav desktop/mobile).
 - `components/systems/DesignSystemNav.tsx`: navigation laterale groupee (sections **Brand** / **Systems** selon `navSection`).
 - `components/brand/*`: pages guide marque (`BrandPlatformGuidePage`, `BrandCharterGuidePage`, `BrandGuideIntro`).
+- `components/brand/ManifesteGallery.tsx`: grilles d'images du Manifeste (placeholders si dossier vide); region nommee (`role="region"`, `aria-labelledby`).
+- `lib/getManifesteGalleryImages.ts`: lecture **serveur uniquement** des fichiers image sous `public/brands/comptoir-sud-pacifique/manifeste/{section}/` (slug valide requis, pas de traversal).
+- `public/brands/comptoir-sud-pacifique/manifeste/*`: assets JPEG/PNG par theme (`minimalisme`, `dessin`, `ligne-chemin`, `postal`, `sensorialite`, `voyage-exotisme`, etc.).
 - `components/systems/WebGuidePage.tsx`: placeholder du guide web.
 - `components/newsletter/NewsletterGuidePage.tsx`: composition globale de la page guide.
 - `components/newsletter/data.ts`: donnees de reference (palette, espacements, anatomie).
@@ -110,6 +113,7 @@ Le commit est principalement une **normalisation editoriale et visuelle**:
   - fermeture au clavier (`Escape`),
   - verrouillage du scroll de fond pendant ouverture.
 - Les icones ne sont plus affichees dans les items de la side nav (navigation texte uniquement); `iconClass` reste dans le registry pour usage futur.
+- **Plateforme de marque — Manifeste**: la page `plateforme-de-marque` inclut le texte long du manifeste et des **galeries** par theme. Les URLs d'images sont derivees du disque au rendu (Server Component); ajouter des fichiers dans le sous-dossier `public/.../manifeste/{slug}/` les affiche automatiquement (tri naturel sur le nom de fichier). Le prop `section` de `ManifesteGallery` doit etre un **slug seul** (`a-z`, `0-9`, tirets), aligne sur le nom du dossier.
 
 ### Risques/points d'attention
 - Le passage systematique vers `text-blue-primary` reduit la variation de contraste; verifier accessibilite/hiérarchie visuelle sur certains blocs.
@@ -125,6 +129,7 @@ Le commit est principalement une **normalisation editoriale et visuelle**:
 - Garder la coherence du tone-of-voice FR.
 - Prioriser les tokens/couleurs definis dans `data.ts` et les classes deja standardisees.
 - Maintenir l'approche "simple, reproductible, orientee marketing ops".
+- Ne pas importer `getManifesteSectionImageUrls` dans un Client Component (`"use client"`): la lecture `fs` est reservee au rendu serveur.
 
 ### Ce qu'il faut eviter
 - Reintroduire des classes legacy (`text-ink`, `text-ink-soft`) sans raison validee.
@@ -132,6 +137,7 @@ Le commit est principalement une **normalisation editoriale et visuelle**:
 - Ajouter des variantes de composants non documentees.
 - Mélanger des règles contradictoires sur l'alignement des textes longs.
 - Ajouter de la complexite technique non necessaire (state, abstractions, config) pour un besoin purement editorial.
+- Passer a `ManifesteGallery` un `section` arbitraire ou avec separateurs de chemin: le helper refuse les slugs non conformes et retourne une liste vide.
 
 ### Prompt de contexte recommande (copier-coller)
 ```
@@ -140,6 +146,7 @@ Le produit est une plateforme de marque + hub de guides: routing canonique /bran
 Le coeur contenu reste le guide newsletter dans components/newsletter; les guides marque vivent dans components/brand.
 Priorites: fiabilite de navigation, coherence visuelle, lisibilite FR, et respect des règles de design documentees.
 Le dernier commit (cfb5636) a harmonise les textes FR, les accents, et les classes de couleur vers text-blue-primary, et a ajoute des règles d'alignement typographique.
+La plateforme de marque inclut le Manifeste avec galeries (`ManifesteGallery` + `getManifesteSectionImageUrls`); images sous public/brands/comptoir-sud-pacifique/manifeste/{slug}/, slug alphanumerique avec tirets uniquement.
 Ne reintroduis pas text-ink/text-ink-soft sauf validation explicite.
 Propose des modifications minimales, compatibles desktop/mobile, et explique l'impact UX/editorial.
 ```
@@ -151,5 +158,6 @@ git log --oneline --decorate -n 12
 git log --merges --oneline -n 5
 git show --numstat --format=fuller HEAD
 git show --unified=0 --no-color HEAD -- components/newsletter
+git show --unified=0 --no-color HEAD -- components/brand lib/getManifesteGalleryImages.ts
 ```
 

@@ -1,6 +1,6 @@
 # Changelog - `extend-design-system` branch
 
-Date: 2026-04-17 (updated for Brand Platform routing)
+Date: 2026-04-17 (updated for Brand Platform routing + manifeste galleries)
 
 ## Overview
 
@@ -9,6 +9,7 @@ This branch evolves the app from a single newsletter-focused page into a modular
 - a shared shell and side navigation,
 - **canonical dynamic routing under `/brand/[system]`** (registry slug; `/systems/[system]` redirects for compatibility),
 - **brand** guides (`plateforme-de-marque`, `charte-graphique`) and **systems** guides (`newsletter`, `web`) distinguished in config via `navSection`,
+- **brand platform manifeste** long-form copy plus theme-based image galleries fed from `public/brands/comptoir-sud-pacifique/manifeste/`,
 - a first additional `web` guide placeholder,
 - visual and copy updates for multi-system / brand-platform positioning,
 - Remix Icon integration for global UI usage.
@@ -35,6 +36,25 @@ This branch evolves the app from a single newsletter-focused page into a modular
 ### Notes
 
 - Historical detail for the first shell iteration (paths under `/systems` as primary) is preserved in the sections below; the **current** primary route is `/brand/[system]`.
+
+---
+
+## 2026-04-17 — Brand platform: Manifeste content and image galleries
+
+### Added
+
+- **`components/brand/ManifesteGallery.tsx`** — responsive image grid (or dashed placeholders when a folder has no images yet); named region for accessibility; `next/image` with filenames in captions.
+- **`lib/getManifesteGalleryImages.ts`** — `getManifesteSectionImageUrls(sectionSlug)` reads `public/brands/comptoir-sud-pacifique/manifeste/{sectionSlug}/` at **server render** only; validates the slug (single path segment, no traversal); returns sorted public URLs; swallows I/O errors as an empty list.
+- **`public/brands/comptoir-sud-pacifique/manifeste/*`** — per-theme asset folders (e.g. `minimalisme`, `dessin`, `postal`, `sensorialite`, `voyage-exotisme`, …) with `fig-*.jpeg` / `.png` files.
+
+### Changed
+
+- **`components/brand/BrandPlatformGuidePage.tsx`** — extended with the full Manifeste narrative and one `ManifesteGallery` block per visual theme section.
+
+### Notes
+
+- `ManifesteGallery` must stay a **Server Component** (or be composed only from server-safe parents) so `getManifesteSectionImageUrls` can use Node `fs`.
+- Adding or replacing files in a theme folder updates the page on the next build/deploy without code changes.
 
 ## Added
 
