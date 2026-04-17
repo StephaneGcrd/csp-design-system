@@ -109,7 +109,7 @@ export function DesignSystemShell({
             id="design-system-mobile-navigation"
             role="dialog"
             aria-modal="true"
-            aria-label="Design systems navigation"
+            aria-label="Brand and systems navigation"
             className={`absolute inset-y-0 left-0 w-[86%] max-w-xs border-r border-slate-200/80 bg-white transition-transform duration-200 ease-out ${
               mobileVisible ? "translate-x-0" : "-translate-x-full"
             }`}

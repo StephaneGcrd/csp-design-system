@@ -19,8 +19,9 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Design Systems · Comptoir Sud Pacifique",
-  description: "Guides modulaires newsletter, web et futurs canaux design system.",
+  title: "Brand Platform · Comptoir Sud Pacifique",
+  description:
+    "Menu marque et systèmes : plateforme de marque, newsletter, web et futurs canaux.",
 };
 
 const useTypekit = process.env.NEXT_PUBLIC_ENABLE_TYPEKIT === "true";

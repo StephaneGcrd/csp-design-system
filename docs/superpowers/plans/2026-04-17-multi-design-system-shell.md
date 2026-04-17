@@ -1,10 +1,20 @@
 # Multi Design System Shell Implementation Plan
 
+## Current state vs this document (read first)
+
+The **canonical** App Router path for the shell + guides is **`/brand/[system]`**. The root route (`/`) and **`/brand`** redirect to `/brand/{defaultSlug}`. **`/systems/[system]`** remains as a **compatibility redirect** to `/brand/{resolvedSlug}`.
+
+The registry lives in **`components/systems/designSystems.tsx`** (file extension `.tsx` in the repo). Entries include **`navSection`: `"brand"` | `"systems"`** for side-nav grouping; brand guide components live under **`components/brand/`**.
+
+The body of this file is an **historical implementation plan** (written when `/systems/[system]` was the primary route). Prefer **`README.md`** and **`docs/llm_project_and_last_merge.md`** for up-to-date architecture summaries.
+
+---
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Transform the app from a single newsletter page into a modular multi-system guide with a persistent side navigation (`newsletter`, `web`, and future systems).
 
-**Architecture:** Introduce a shell component that owns the global page layout and side navigation, then register each design system through a typed config map. Keep each system's content isolated in its own module and render via route param (`/systems/[system]`) with a default redirect from `/`.
+**Architecture (original plan):** Introduce a shell component that owns the global page layout and side navigation, then register each design system through a typed config map. Keep each system's content isolated in its own module and render via route param (`/systems/[system]` in the plan; **superseded by `/brand/[system]`** in the current app) with a default redirect from `/`.
 
 **Tech Stack:** Next.js App Router, React 19, TypeScript, ESLint (next/core-web-vitals), Tailwind CSS 4
 

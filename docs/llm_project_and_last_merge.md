@@ -3,12 +3,12 @@
 ## 1) Vue d'ensemble du projet
 
 ### Objectif produit
-Ce repository contient une application web interne (Next.js) servant de hub de design systems pour Comptoir Sud Pacifique.
+Ce repository contient une application web interne (Next.js) servant de **plateforme de marque et hub de design systems** pour Comptoir Sud Pacifique.
 
-Le produit est maintenant organise autour de plusieurs guides modulaires:
-- `newsletter` (guide complet existant),
-- `web` (module en construction),
-- des points d'extension pour de futurs canaux.
+Le produit est organise autour de guides modulaires enregistres dans un registry unique:
+- **Brand** (guides internes): `plateforme-de-marque`, `charte-graphique`,
+- **Systems** (canaux / execution): `newsletter` (guide complet), `web` (module en construction),
+- extension possible pour de futurs canaux via `components/systems/designSystems.tsx`.
 
 Le guide newsletter centralise:
 - les couleurs autorisées,
@@ -26,11 +26,14 @@ Le guide newsletter centralise:
 - Lint: `ESLint 9` via `eslint-config-next`
 
 ### Structure utile
-- `app/page.tsx`: redirection vers le design system par defaut.
-- `app/systems/[system]/page.tsx`: route dynamique par slug (`newsletter`, `web`, ...).
-- `components/systems/designSystems.tsx`: registry type des systemes + resolution slug.
+- `app/page.tsx`: redirection vers `/brand/{slug}` du guide par defaut.
+- `app/brand/page.tsx`: redirection vers `/brand/{defaultSlug}`.
+- `app/brand/[system]/page.tsx`: **route canonique** — shell + contenu du guide pour le slug resolu.
+- `app/systems/[system]/page.tsx`: **redirection** vers `/brand/{slug}` (URLs historiques / liens externes).
+- `components/systems/designSystems.tsx`: registry typee (`slug`, `label`, `description`, `iconClass`, `navSection`, `GuidePage`) + resolution de slug.
 - `components/systems/DesignSystemShell.tsx`: shell partage (layout + nav desktop/mobile).
-- `components/systems/DesignSystemNav.tsx`: navigation laterale commune.
+- `components/systems/DesignSystemNav.tsx`: navigation laterale groupee (sections **Brand** / **Systems** selon `navSection`).
+- `components/brand/*`: pages guide marque (`BrandPlatformGuidePage`, `BrandCharterGuidePage`, `BrandGuideIntro`).
 - `components/systems/WebGuidePage.tsx`: placeholder du guide web.
 - `components/newsletter/NewsletterGuidePage.tsx`: composition globale de la page guide.
 - `components/newsletter/data.ts`: donnees de reference (palette, espacements, anatomie).
@@ -96,15 +99,17 @@ Le commit est principalement une **normalisation editoriale et visuelle**:
 - Impact principal: rendu visuel, qualite editoriale FR, et clarté des regles de mise en page.
 - Le guide devient plus fiable comme source de reference pour generer de nouveaux templates newsletter.
 
-### Etat actuel du projet (working tree en cours)
-- Migration active vers une architecture multi-systeme (route `/systems/[system]`, shell partage, registry des systemes).
-- `app/page.tsx` redirige vers le systeme par defaut.
-- Navigation laterale responsive en place, avec renforts d'accessibilite mobile:
+### Etat actuel du projet (architecture shell + brand)
+- Hub **multi-guides** avec shell partage: route canonique **`/brand/[system]`**, registry dans `designSystems.tsx`.
+- Chaque entree du registry a un champ **`navSection`: `"brand"` | `"systems"`** (source de verite pour le groupement dans la side nav).
+- `app/page.tsx` et `/systems/...` redirigent vers `/brand/...` (slug canonique, fallback sur le defaut si inconnu).
+- Metadata racine (`app/layout.tsx`): titre oriente **Brand Platform** (plus « Design Systems » seul).
+- Navigation laterale responsive, avec renforts d'accessibilite mobile:
   - `aria-expanded` / `aria-controls` sur le bouton menu,
-  - panneau mobile semantique (`role="dialog"`, `aria-modal`),
+  - panneau mobile (`role="dialog"`, `aria-modal`, libelle aligne sur la nav),
   - fermeture au clavier (`Escape`),
   - verrouillage du scroll de fond pendant ouverture.
-- Les icones ne sont plus affichees dans les items de la side nav (navigation texte uniquement).
+- Les icones ne sont plus affichees dans les items de la side nav (navigation texte uniquement); `iconClass` reste dans le registry pour usage futur.
 
 ### Risques/points d'attention
 - Le passage systematique vers `text-blue-primary` reduit la variation de contraste; verifier accessibilite/hiérarchie visuelle sur certains blocs.
@@ -123,7 +128,7 @@ Le commit est principalement une **normalisation editoriale et visuelle**:
 
 ### Ce qu'il faut eviter
 - Reintroduire des classes legacy (`text-ink`, `text-ink-soft`) sans raison validee.
-- Casser les conventions de navigation commune (`/systems/[system]`, fallback vers systeme par defaut).
+- Casser les conventions de navigation: **liens internes sous `/brand/[slug]`**, redirection depuis `/systems/...`, fallback vers le systeme par defaut via `resolveDesignSystemSlug`.
 - Ajouter des variantes de composants non documentees.
 - Mélanger des règles contradictoires sur l'alignement des textes longs.
 - Ajouter de la complexite technique non necessaire (state, abstractions, config) pour un besoin purement editorial.
@@ -131,8 +136,8 @@ Le commit est principalement une **normalisation editoriale et visuelle**:
 ### Prompt de contexte recommande (copier-coller)
 ```
 Tu travailles sur le repository csp-design-system (Next.js 16 + React 19 + Tailwind v4).
-Le produit est un hub de design systems avec routing dynamique (/systems/[system]) et shell partage.
-Le coeur contenu reste le guide newsletter interne dans components/newsletter.
+Le produit est une plateforme de marque + hub de guides: routing canonique /brand/[system], redirect depuis /systems/[system], shell partage et registry typee (navSection brand vs systems).
+Le coeur contenu reste le guide newsletter dans components/newsletter; les guides marque vivent dans components/brand.
 Priorites: fiabilite de navigation, coherence visuelle, lisibilite FR, et respect des règles de design documentees.
 Le dernier commit (cfb5636) a harmonise les textes FR, les accents, et les classes de couleur vers text-blue-primary, et a ajoute des règles d'alignement typographique.
 Ne reintroduis pas text-ink/text-ink-soft sauf validation explicite.

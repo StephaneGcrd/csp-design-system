@@ -1,5 +1,11 @@
 # Agent Code Review - Changelog
 
+## 2026-04-17 (documentation)
+
+### Changed
+
+- Updated `docs/agent_code_review_guide.md` project context with canonical **`/brand/[system]`** routing and **`/systems`** redirect behavior.
+
 ## 2026-04-17
 
 ### Added

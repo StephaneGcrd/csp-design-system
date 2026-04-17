@@ -11,6 +11,7 @@ Ce document standardise la revue de code pour les agents (dont les agents de cod
 ## Contexte projet
 
 - Stack principale: Next.js (App Router), React, TypeScript, Tailwind.
+- Surface applicative: shell + guides dynamiques sous **`/brand/[system]`**; **`/systems/[system]`** ne fait que rediriger vers `/brand/...`. Registry et groupement nav: `components/systems/designSystems.tsx` (`navSection` brand vs systems).
 - Important: la version de Next.js peut diverger des pratiques historiques.
 - Reference obligatoire pour Next.js: `node_modules/next/dist/docs/`.
 

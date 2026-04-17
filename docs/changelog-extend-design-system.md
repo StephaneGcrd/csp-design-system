@@ -1,22 +1,46 @@
 # Changelog - `extend-design-system` branch
 
-Date: 2026-04-17
+Date: 2026-04-17 (updated for Brand Platform routing)
 
 ## Overview
 
-This branch evolves the app from a single newsletter-focused page into a modular multi-design-system experience with:
+This branch evolves the app from a single newsletter-focused page into a modular hub with:
 
 - a shared shell and side navigation,
-- dynamic routing by design-system slug,
+- **canonical dynamic routing under `/brand/[system]`** (registry slug; `/systems/[system]` redirects for compatibility),
+- **brand** guides (`plateforme-de-marque`, `charte-graphique`) and **systems** guides (`newsletter`, `web`) distinguished in config via `navSection`,
 - a first additional `web` guide placeholder,
-- visual and copy updates for multi-system positioning,
+- visual and copy updates for multi-system / brand-platform positioning,
 - Remix Icon integration for global UI usage.
+
+---
+
+## 2026-04-17 — Brand Platform (`/brand`) and registry `navSection`
+
+### Added
+
+- `app/brand/page.tsx` — redirect to default slug under `/brand`.
+- `app/brand/[system]/page.tsx` — shell + guide (canonical app surface).
+- `components/brand/BrandPlatformGuidePage.tsx`, `BrandCharterGuidePage.tsx`, `BrandGuideIntro.tsx` — internal brand guide scaffolds.
+
+### Changed
+
+- `app/page.tsx` — root redirect target is `/brand/{defaultSlug}` (was `/systems/...`).
+- `app/systems/[system]/page.tsx` — **redirect only** to `/brand/{resolvedSlug}` (no duplicate shell render).
+- `app/layout.tsx` — metadata title/description oriented to Brand Platform.
+- `components/systems/designSystems.tsx` — new entries for brand guides; **`navSection`: `"brand"` | `"systems"`** on each registry row; nav items include `navSection`.
+- `components/systems/DesignSystemNav.tsx` — links target `/brand/...`; side nav grouped into **Brand** and **Systems** from `navSection`.
+- `components/systems/DesignSystemShell.tsx` — mobile drawer `aria-label` aligned with nav wording.
+
+### Notes
+
+- Historical detail for the first shell iteration (paths under `/systems` as primary) is preserved in the sections below; the **current** primary route is `/brand/[system]`.
 
 ## Added
 
 ### New route and modular system pages
 
-- Added `app/systems/[system]/page.tsx` to render guide content by slug.
+- Added `app/systems/[system]/page.tsx` to render guide content by slug (later superseded as **canonical** route by `app/brand/[system]/page.tsx`; `systems` route kept as redirect — see section above).
 - Added registry-driven fallback and canonical slug redirect behavior.
 
 ### New shared shell and side navigation
@@ -31,7 +55,7 @@ This branch evolves the app from a single newsletter-focused page into a modular
 ### New design-system registry
 
 - Added `components/systems/designSystems.tsx`:
-  - typed system entries (`slug`, `label`, `description`, `GuidePage`, `iconClass`),
+  - typed system entries (`slug`, `label`, `description`, `GuidePage`, `iconClass`; later **`navSection`**),
   - default-system resolution,
   - slug resolver and nav item mapping,
   - normalized slug lookup (`trim` + lowercase) for safer route resolution.
@@ -49,7 +73,7 @@ This branch evolves the app from a single newsletter-focused page into a modular
 ### Root route behavior
 
 - Updated `app/page.tsx`:
-  - replaced direct newsletter rendering with redirect to default system route (`/systems/{defaultSlug}`).
+  - replaced direct newsletter rendering with redirect to the default guide route (now **`/brand/{defaultSlug}`**; was `/systems/{defaultSlug}` at this milestone).
 
 ### Global app metadata and icon styles
 
@@ -96,11 +120,13 @@ This branch evolves the app from a single newsletter-focused page into a modular
 
 ### New files
 
-- `app/systems/[system]/page.tsx`
+- `app/systems/[system]/page.tsx` (redirect-only after Brand Platform update)
+- `app/brand/page.tsx`, `app/brand/[system]/page.tsx` (canonical shell route)
 - `components/systems/DesignSystemNav.tsx`
 - `components/systems/DesignSystemShell.tsx`
 - `components/systems/WebGuidePage.tsx`
 - `components/systems/designSystems.tsx`
+- `components/brand/*` (brand guide pages)
 - `docs/superpowers/plans/2026-04-17-multi-design-system-shell.md`
 
 ## Notes
