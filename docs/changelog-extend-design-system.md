@@ -10,7 +10,7 @@ This branch evolves the app from a single newsletter-focused page into a modular
 - dynamic routing by design-system slug,
 - a first additional `web` guide placeholder,
 - visual and copy updates for multi-system positioning,
-- Remix Icon integration for navigation and UI icons.
+- Remix Icon integration for global UI usage.
 
 ## Added
 
@@ -33,7 +33,8 @@ This branch evolves the app from a single newsletter-focused page into a modular
 - Added `components/systems/designSystems.tsx`:
   - typed system entries (`slug`, `label`, `description`, `GuidePage`, `iconClass`),
   - default-system resolution,
-  - slug resolver and nav item mapping.
+  - slug resolver and nav item mapping,
+  - normalized slug lookup (`trim` + lowercase) for safer route resolution.
 
 ### New Web guide placeholder
 
@@ -67,13 +68,15 @@ This branch evolves the app from a single newsletter-focused page into a modular
 - Updated `components/systems/DesignSystemShell.tsx`:
   - sidenav background switched to white,
   - added soft thin right border to separate navigation from content,
-  - mirrored white panel + right border in mobile drawer.
+  - mirrored white panel + right border in mobile drawer,
+  - improved mobile navigation accessibility (`aria-expanded`, `aria-controls`, `role="dialog"`, `aria-modal`, `Escape` close support),
+  - locked body scroll while the mobile drawer is mounted.
 
-### Navigation iconography
+### Navigation iconography and cleanup
 
 - Updated `components/systems/DesignSystemNav.tsx` and `components/systems/designSystems.tsx`:
-  - added per-system icon classes,
-  - rendered icons in nav item labels.
+  - kept per-system icon classes available in config for future usage,
+  - removed icon rendering from side-nav item labels for a cleaner text-first navigation.
 
 ## Dependencies
 

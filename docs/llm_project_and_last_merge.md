@@ -3,8 +3,14 @@
 ## 1) Vue d'ensemble du projet
 
 ### Objectif produit
-Ce repository contient une application web interne (Next.js) servant de guide de design system pour les newsletters de Comptoir Sud Pacifique.  
-Le coeur actuel du projet est une page de référence qui centralise:
+Ce repository contient une application web interne (Next.js) servant de hub de design systems pour Comptoir Sud Pacifique.
+
+Le produit est maintenant organise autour de plusieurs guides modulaires:
+- `newsletter` (guide complet existant),
+- `web` (module en construction),
+- des points d'extension pour de futurs canaux.
+
+Le guide newsletter centralise:
 - les couleurs autorisées,
 - la typographie,
 - l'echelle d'espacement,
@@ -20,7 +26,12 @@ Le coeur actuel du projet est une page de référence qui centralise:
 - Lint: `ESLint 9` via `eslint-config-next`
 
 ### Structure utile
-- `app/page.tsx`: point d'entree de la page principale (guide).
+- `app/page.tsx`: redirection vers le design system par defaut.
+- `app/systems/[system]/page.tsx`: route dynamique par slug (`newsletter`, `web`, ...).
+- `components/systems/designSystems.tsx`: registry type des systemes + resolution slug.
+- `components/systems/DesignSystemShell.tsx`: shell partage (layout + nav desktop/mobile).
+- `components/systems/DesignSystemNav.tsx`: navigation laterale commune.
+- `components/systems/WebGuidePage.tsx`: placeholder du guide web.
 - `components/newsletter/NewsletterGuidePage.tsx`: composition globale de la page guide.
 - `components/newsletter/data.ts`: donnees de reference (palette, espacements, anatomie).
 - `components/newsletter/PaletteGrid.tsx`: grille palette + interaction de copie hex.
@@ -39,10 +50,10 @@ Le systeme vise une coherence editoriale et visuelle entre les emails marketing:
 
 ---
 
-## 2) Dernier merge/commit a connaitre
+## 2) Dernier commit de reference + etat actuel
 
-> Note: il n'y a pas de commit de type "merge commit" recent dans l'historique.  
-> Le dernier changement integre sur `main` est le commit ci-dessous.
+> Note: pas de merge commit recent dans l'historique local.
+> Le commit de reference sur `main` reste celui ci-dessous.
 
 ### Metadata
 - Commit: `cfb5636ea33247122dbd2eb9767e01fff894f71e`
@@ -85,6 +96,16 @@ Le commit est principalement une **normalisation editoriale et visuelle**:
 - Impact principal: rendu visuel, qualite editoriale FR, et clarté des regles de mise en page.
 - Le guide devient plus fiable comme source de reference pour generer de nouveaux templates newsletter.
 
+### Etat actuel du projet (working tree en cours)
+- Migration active vers une architecture multi-systeme (route `/systems/[system]`, shell partage, registry des systemes).
+- `app/page.tsx` redirige vers le systeme par defaut.
+- Navigation laterale responsive en place, avec renforts d'accessibilite mobile:
+  - `aria-expanded` / `aria-controls` sur le bouton menu,
+  - panneau mobile semantique (`role="dialog"`, `aria-modal`),
+  - fermeture au clavier (`Escape`),
+  - verrouillage du scroll de fond pendant ouverture.
+- Les icones ne sont plus affichees dans les items de la side nav (navigation texte uniquement).
+
 ### Risques/points d'attention
 - Le passage systematique vers `text-blue-primary` reduit la variation de contraste; verifier accessibilite/hiérarchie visuelle sur certains blocs.
 - Les exemples "A eviter / A privilegier" sont pedagogiques mais ASCII-only; a harmoniser si la strategie contenu impose UTF-8 complet partout.
@@ -95,13 +116,14 @@ Le commit est principalement une **normalisation editoriale et visuelle**:
 ## 3) Consignes pour un LLM qui intervient sur ce projet
 
 ### Ce qu'il faut preserver
-- Respecter la structure de la page guide et son role de documentation interne.
+- Respecter l'architecture modulaire (shell + route dynamique + registry) et le role de documentation interne.
 - Garder la coherence du tone-of-voice FR.
 - Prioriser les tokens/couleurs definis dans `data.ts` et les classes deja standardisees.
 - Maintenir l'approche "simple, reproductible, orientee marketing ops".
 
 ### Ce qu'il faut eviter
 - Reintroduire des classes legacy (`text-ink`, `text-ink-soft`) sans raison validee.
+- Casser les conventions de navigation commune (`/systems/[system]`, fallback vers systeme par defaut).
 - Ajouter des variantes de composants non documentees.
 - Mélanger des règles contradictoires sur l'alignement des textes longs.
 - Ajouter de la complexite technique non necessaire (state, abstractions, config) pour un besoin purement editorial.
@@ -109,8 +131,9 @@ Le commit est principalement une **normalisation editoriale et visuelle**:
 ### Prompt de contexte recommande (copier-coller)
 ```
 Tu travailles sur le repository csp-design-system (Next.js 16 + React 19 + Tailwind v4).
-Le coeur produit est un guide newsletter interne dans components/newsletter.
-Priorites: coherence visuelle, lisibilite FR, et respect des règles de design documentees.
+Le produit est un hub de design systems avec routing dynamique (/systems/[system]) et shell partage.
+Le coeur contenu reste le guide newsletter interne dans components/newsletter.
+Priorites: fiabilite de navigation, coherence visuelle, lisibilite FR, et respect des règles de design documentees.
 Le dernier commit (cfb5636) a harmonise les textes FR, les accents, et les classes de couleur vers text-blue-primary, et a ajoute des règles d'alignement typographique.
 Ne reintroduis pas text-ink/text-ink-soft sauf validation explicite.
 Propose des modifications minimales, compatibles desktop/mobile, et explique l'impact UX/editorial.
