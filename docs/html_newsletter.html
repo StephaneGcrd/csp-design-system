@@ -1,0 +1,1501 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Design System Newsletter · Comptoir Sud Pacifique</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* ═══════════════════════════════════════════════════════════
+     TOKENS — reprise fidèle du design system Notion
+     ═══════════════════════════════════════════════════════════ */
+      :root {
+        --blue-primary: #067290;
+        --blue-light: #e7f4f7;
+        --off-white: #f7f6f1;
+        --white: #ffffff;
+        --ink: #0a2a33; /* dérivé pour le texte (non dans le DS, utilisé uniquement sur la vitrine) */
+        --ink-soft: #3d5f68;
+
+        /* Échelle de spacing (puissances de 2) */
+        --s-8: 8px;
+        --s-16: 16px;
+        --s-32: 32px;
+        --s-64: 64px;
+        --s-128: 128px;
+        --s-256: 256px;
+        --s-512: 512px;
+
+        /* Typographie DS */
+        --f-body:
+          "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+        --f-display:
+          "Fraunces", Georgia, serif; /* uniquement pour la vitrine */
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: var(--f-body);
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--ink);
+        background: var(--white);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+     NAV VITRINE
+     ═══════════════════════════════════════════════════════════ */
+      .nav-vitrine {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background: rgba(247, 246, 241, 0.85);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(6, 114, 144, 0.08);
+      }
+      .nav-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--s-16) var(--s-32);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--s-32);
+      }
+      .nav-brand {
+        font-family: var(--f-display);
+        font-style: italic;
+        font-weight: 400;
+        font-size: 18px;
+        color: var(--blue-primary);
+        letter-spacing: -0.01em;
+      }
+      .nav-brand span {
+        font-style: normal;
+        font-weight: 500;
+      }
+      .nav-links {
+        display: flex;
+        gap: var(--s-32);
+        font-size: 14px;
+        font-weight: 500;
+      }
+      .nav-links a {
+        color: var(--ink-soft);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .nav-links a:hover {
+        color: var(--blue-primary);
+      }
+      @media (max-width: 720px) {
+        .nav-links {
+          display: none;
+        }
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+     HERO VITRINE
+     ═══════════════════════════════════════════════════════════ */
+      .hero {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--s-128) var(--s-32) var(--s-64);
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(
+          circle,
+          rgba(6, 114, 144, 0.08) 0%,
+          transparent 70%
+        );
+        pointer-events: none;
+      }
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--s-8);
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--blue-primary);
+        margin-bottom: var(--s-32);
+      }
+      .hero-eyebrow::before {
+        content: "";
+        width: 32px;
+        height: 1px;
+        background: var(--blue-primary);
+      }
+      .hero h1 {
+        font-family: var(--f-display);
+        font-weight: 300;
+        font-size: clamp(42px, 7vw, 88px);
+        line-height: 1.02;
+        letter-spacing: -0.025em;
+        color: var(--ink);
+        margin-bottom: var(--s-32);
+        max-width: 900px;
+      }
+      .hero h1 em {
+        font-style: italic;
+        font-weight: 300;
+        color: var(--blue-primary);
+      }
+      .hero-lead {
+        font-size: 19px;
+        line-height: 1.55;
+        color: var(--ink-soft);
+        max-width: 620px;
+        margin-bottom: var(--s-64);
+      }
+      .hero-meta {
+        display: flex;
+        gap: var(--s-64);
+        flex-wrap: wrap;
+        padding-top: var(--s-32);
+        border-top: 1px solid rgba(6, 114, 144, 0.15);
+        font-size: 13px;
+        color: var(--ink-soft);
+      }
+      .hero-meta strong {
+        display: block;
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--ink);
+        margin-bottom: 4px;
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+     SECTIONS — structure commune
+     ═══════════════════════════════════════════════════════════ */
+      section.ds {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: var(--s-64) var(--s-32);
+      }
+      .section-head {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: var(--s-32);
+        margin-bottom: var(--s-64);
+        align-items: baseline;
+      }
+      .section-num {
+        font-family: var(--f-display);
+        font-style: italic;
+        font-weight: 300;
+        font-size: 48px;
+        color: var(--blue-primary);
+        line-height: 1;
+      }
+      .section-title h2 {
+        font-family: var(--f-display);
+        font-weight: 400;
+        font-size: clamp(32px, 4.5vw, 52px);
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+        margin-bottom: var(--s-16);
+      }
+      .section-title p {
+        font-size: 16px;
+        color: var(--ink-soft);
+        max-width: 640px;
+      }
+      @media (max-width: 720px) {
+        .section-head {
+          grid-template-columns: 1fr;
+          gap: var(--s-16);
+        }
+        .section-num {
+          font-size: 32px;
+        }
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+     1 · PALETTE
+     ═══════════════════════════════════════════════════════════ */
+      .palette-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: var(--s-16);
+      }
+      .swatch {
+        border: 1px solid rgba(6, 114, 144, 0.12);
+        border-radius: 4px;
+        overflow: hidden;
+        background: var(--white);
+        cursor: pointer;
+        transition:
+          transform 0.25s ease,
+          box-shadow 0.25s ease;
+      }
+      .swatch:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(6, 114, 144, 0.1);
+      }
+      .swatch-color {
+        aspect-ratio: 1.3;
+        display: flex;
+        align-items: flex-end;
+        padding: var(--s-16);
+      }
+      .swatch-color .on {
+        font-size: 12px;
+        font-weight: 500;
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .swatch:hover .swatch-color .on {
+        opacity: 1;
+      }
+      .swatch-meta {
+        padding: var(--s-16);
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: var(--s-8);
+      }
+      .swatch-name {
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--ink);
+      }
+      .swatch-hex {
+        font-family: "SF Mono", Menlo, monospace;
+        font-size: 12px;
+        color: var(--ink-soft);
+        letter-spacing: 0.02em;
+      }
+      .swatch[data-copied="true"] .swatch-hex::after {
+        content: " · copié";
+        color: var(--blue-primary);
+        font-weight: 600;
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+     2 · TYPOGRAPHIE
+     ═══════════════════════════════════════════════════════════ */
+      .type-stack {
+        display: flex;
+        flex-direction: column;
+        gap: var(--s-32);
+        background: var(--white);
+        border: 1px solid rgba(6, 114, 144, 0.1);
+        padding: var(--s-64);
+      }
+      @media (max-width: 720px) {
+        .type-stack {
+          padding: var(--s-32);
+        }
+      }
+      .type-row {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: var(--s-32);
+        align-items: baseline;
+        padding-bottom: var(--s-32);
+        border-bottom: 1px dashed rgba(6, 114, 144, 0.15);
+      }
+      .type-row:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+      .type-label {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--blue-primary);
+      }
+      .type-label small {
+        display: block;
+        text-transform: none;
+        letter-spacing: 0;
+        font-weight: 400;
+        color: var(--ink-soft);
+        margin-top: 4px;
+        font-size: 12px;
+      }
+      .type-sample {
+        color: var(--ink);
+      }
+      .type-title1 {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 1.3;
+      }
+      .type-title2 {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 1.3;
+      }
+      .type-body {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      @media (max-width: 720px) {
+        .type-row {
+          grid-template-columns: 1fr;
+          gap: var(--s-8);
+        }
+      }
+
+      .type-note {
+        margin-top: var(--s-32);
+        padding: var(--s-16);
+        background: var(--blue-light);
+        border-left: 3px solid var(--blue-primary);
+        font-size: 14px;
+        color: var(--ink);
+      }
+      .type-note strong {
+        color: var(--blue-primary);
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+     3 · SPACING
+     ═══════════════════════════════════════════════════════════ */
+      .spacing-legend {
+        font-size: 13px;
+        color: var(--ink-soft);
+        margin-bottom: var(--s-32);
+        padding: var(--s-16);
+        background: var(--blue-light);
+        display: inline-block;
+      }
+      .spacing-legend code {
+        font-family: "SF Mono", Menlo, monospace;
+        background: var(--white);
+        padding: 2px 6px;
+        font-size: 12px;
+      }
+      .spacing-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--s-16);
+      }
+      .spacing-row {
+        display: grid;
+        grid-template-columns: 80px 1fr 80px;
+        gap: var(--s-16);
+        align-items: center;
+      }
+      .spacing-label {
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--ink);
+        font-family: "SF Mono", Menlo, monospace;
+      }
+      .spacing-bar-wrap {
+        height: 32px;
+        background: var(--white);
+        border: 1px solid rgba(6, 114, 144, 0.08);
+        position: relative;
+        overflow: hidden;
+      }
+      .spacing-bar {
+        height: 100%;
+        background: var(--blue-primary);
+        transition: width 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .spacing-usage {
+        font-size: 12px;
+        color: var(--ink-soft);
+        text-align: right;
+      }
+      @media (max-width: 720px) {
+        .spacing-row {
+          grid-template-columns: 60px 1fr;
+        }
+        .spacing-usage {
+          display: none;
+        }
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+     4 · BOUTONS
+     ═══════════════════════════════════════════════════════════ */
+      .btn-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--s-32);
+      }
+      @media (max-width: 720px) {
+        .btn-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .btn-card {
+        background: var(--white);
+        border: 1px solid rgba(6, 114, 144, 0.1);
+        padding: var(--s-64) var(--s-32);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--s-32);
+        text-align: center;
+      }
+      .btn-card h3 {
+        font-weight: 600;
+        font-size: 14px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--blue-primary);
+      }
+      .btn-spec {
+        font-size: 13px;
+        color: var(--ink-soft);
+        line-height: 1.5;
+      }
+      .btn-spec code {
+        font-family: "SF Mono", Menlo, monospace;
+        font-size: 12px;
+        background: var(--off-white);
+        padding: 2px 6px;
+        color: var(--blue-primary);
+      }
+
+      /* Bouton style 1 — underlined */
+      .btn-underlined {
+        display: inline-block;
+        color: var(--blue-primary);
+        background: none;
+        border: none;
+        text-decoration: underline;
+        text-underline-offset: 4px;
+        font-family: var(--f-body);
+        font-weight: 500;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 0;
+        transition: text-underline-offset 0.2s;
+      }
+      .btn-underlined:hover {
+        text-underline-offset: 6px;
+      }
+
+      /* Bouton style 2 — filled */
+      .btn-filled {
+        display: inline-block;
+        color: var(--white);
+        background: var(--blue-primary);
+        border: none;
+        font-family: var(--f-body);
+        font-weight: 500;
+        font-size: 16px;
+        padding: 12px 24px; /* 12px x/y selon le DS, horizontal élargi pour lisibilité */
+        cursor: pointer;
+        transition:
+          background 0.2s,
+          transform 0.15s;
+      }
+      .btn-filled:hover {
+        background: #055c74;
+      }
+      .btn-filled:active {
+        transform: scale(0.98);
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+     5 · ANATOMIE
+     ═══════════════════════════════════════════════════════════ */
+      .anatomy {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--s-64);
+        align-items: start;
+      }
+      @media (max-width: 900px) {
+        .anatomy {
+          grid-template-columns: 1fr;
+        }
+      }
+      .anatomy-visual {
+        background: var(--white);
+        border: 1px solid rgba(6, 114, 144, 0.1);
+        padding: var(--s-32);
+        display: flex;
+        flex-direction: column;
+        gap: var(--s-8);
+        position: sticky;
+        top: 100px;
+      }
+      .an-block {
+        background: var(--blue-light);
+        padding: var(--s-16);
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--blue-primary);
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-align: center;
+        transition:
+          background 0.2s,
+          color 0.2s,
+          transform 0.2s;
+        cursor: pointer;
+        border: 1px solid transparent;
+      }
+      .an-block.header {
+        background: var(--blue-primary);
+        color: var(--white);
+        padding: var(--s-32) var(--s-16);
+      }
+      .an-block.hero-img {
+        background: linear-gradient(135deg, #067290 0%, #4da9bf 100%);
+        color: var(--white);
+        padding: var(--s-64) var(--s-16);
+      }
+      .an-block.hero-text {
+        padding: var(--s-32) var(--s-16);
+      }
+      .an-block.module {
+        padding: var(--s-32) var(--s-16);
+      }
+      .an-block.footer {
+        background: var(--blue-primary);
+        color: var(--white);
+        padding: var(--s-32) var(--s-16);
+      }
+      .an-block:hover,
+      .an-block.active {
+        transform: translateX(4px);
+        border-color: var(--blue-primary);
+      }
+
+      .anatomy-notes {
+        display: flex;
+        flex-direction: column;
+        gap: var(--s-32);
+      }
+      .note {
+        border-left: 3px solid var(--blue-primary);
+        padding: var(--s-16) var(--s-32);
+        background: var(--white);
+        transition: background 0.2s;
+      }
+      .note:hover {
+        background: var(--blue-light);
+      }
+      .note h4 {
+        font-family: var(--f-display);
+        font-weight: 400;
+        font-size: 22px;
+        line-height: 1.2;
+        margin-bottom: var(--s-8);
+        color: var(--ink);
+      }
+      .note ul {
+        list-style: none;
+        font-size: 14px;
+        color: var(--ink-soft);
+        line-height: 1.7;
+      }
+      .note ul li::before {
+        content: "→ ";
+        color: var(--blue-primary);
+        font-weight: 600;
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+     6 · EXEMPLE COMPLET (mini newsletter)
+     ═══════════════════════════════════════════════════════════ */
+      .device-switch {
+        display: inline-flex;
+        border: 1px solid var(--blue-primary);
+        margin-bottom: var(--s-32);
+        overflow: hidden;
+      }
+      .device-switch button {
+        font-family: var(--f-body);
+        background: var(--white);
+        color: var(--blue-primary);
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .device-switch button.active {
+        background: var(--blue-primary);
+        color: var(--white);
+      }
+
+      .newsletter-frame {
+        margin: 0 auto;
+        background: var(--white);
+        border: 1px solid rgba(6, 114, 144, 0.15);
+        box-shadow: 0 20px 60px -20px rgba(6, 114, 144, 0.2);
+        transition: max-width 0.4s ease;
+        overflow: hidden;
+      }
+      .newsletter-frame.desktop {
+        max-width: 720px;
+      }
+      .newsletter-frame.mobile {
+        max-width: 380px;
+      }
+
+      /* Newsletter components (fidèles au DS) */
+      .nl-header {
+        background: var(--blue-primary);
+        color: var(--white);
+        padding: 24px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nl-logo {
+        font-family: var(--f-display);
+        font-style: italic;
+        font-weight: 300;
+        font-size: 20px;
+        letter-spacing: 0.02em;
+      }
+      .nl-nav {
+        display: flex;
+        gap: 20px;
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .nl-hero-image {
+        aspect-ratio: 16/10;
+        background: linear-gradient(135deg, #e7f4f7 0%, #067290 100%);
+        display: flex;
+        align-items: flex-end;
+        padding: 24px;
+        color: var(--white);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        position: relative;
+        transition: filter 0.3s;
+      }
+      .nl-hero-image:hover {
+        filter: brightness(1.05);
+      }
+      .nl-hero-image::after {
+        content: "→";
+        position: absolute;
+        right: 24px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 32px;
+        transition: transform 0.3s;
+      }
+      .nl-hero-image:hover::after {
+        transform: translate(6px, -50%);
+      }
+
+      .nl-hero-text {
+        padding: 48px 32px 32px;
+        text-align: center;
+      }
+      .nl-hero-text h1 {
+        font-family: var(--f-body);
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 1.3;
+        color: var(--ink);
+        margin-bottom: 16px;
+      }
+      .nl-hero-text p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--ink-soft);
+        max-width: 420px;
+        margin: 0 auto 24px;
+      }
+      .nl-hero-text .btn-filled {
+        font-size: 14px;
+      }
+
+      .nl-wildcards {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 16px;
+        padding: 32px;
+        background: var(--off-white);
+      }
+      .newsletter-frame.mobile .nl-wildcards {
+        grid-template-columns: 1fr 1fr;
+      }
+      .nl-wildcard {
+        cursor: pointer;
+        text-align: center;
+      }
+      .nl-wildcard-img {
+        aspect-ratio: 1;
+        background: var(--white);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 12px;
+        transition: background 0.2s;
+      }
+      .nl-wildcard:hover .nl-wildcard-img {
+        background: var(--blue-light);
+      }
+      .nl-wildcard-img span {
+        font-family: var(--f-display);
+        font-style: italic;
+        font-size: 24px;
+        color: var(--blue-primary);
+      }
+      .nl-wildcard-name {
+        font-size: 14px;
+        font-weight: 500;
+        color: var(--ink);
+      }
+
+      .nl-module-combo {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0;
+        background: var(--white);
+      }
+      .newsletter-frame.mobile .nl-module-combo {
+        grid-template-columns: 1fr;
+      }
+      .nl-module-img {
+        aspect-ratio: 1;
+        background: linear-gradient(135deg, #f7f6f1 0%, #e7f4f7 100%);
+      }
+      .nl-module-text {
+        padding: 32px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 16px;
+      }
+      .nl-module-text h2 {
+        font-family: var(--f-body);
+        font-weight: 700;
+        font-size: 18px;
+        color: var(--ink);
+      }
+      .nl-module-text p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--ink-soft);
+      }
+
+      .nl-reassurances {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        padding: 32px;
+        background: var(--blue-light);
+        text-align: center;
+      }
+      .newsletter-frame.mobile .nl-reassurances {
+        grid-template-columns: 1fr;
+      }
+      .nl-reassurance .icon {
+        font-size: 32px;
+        color: var(--blue-primary);
+        margin-bottom: 8px;
+      }
+      .nl-reassurance p {
+        font-size: 14px;
+        color: var(--ink);
+      }
+
+      .nl-brand {
+        padding: 48px 32px;
+        background: var(--off-white);
+        text-align: center;
+        border-top: 1px solid rgba(6, 114, 144, 0.08);
+      }
+      .nl-brand-logo {
+        font-family: var(--f-display);
+        font-style: italic;
+        font-size: 24px;
+        color: var(--blue-primary);
+        margin-bottom: 24px;
+      }
+      .nl-brand p {
+        font-size: 16px;
+        line-height: 1.7;
+        color: var(--ink);
+        max-width: 460px;
+        margin: 0 auto;
+      }
+
+      .nl-footer {
+        background: var(--blue-primary);
+        color: var(--white);
+        padding: 48px 32px 32px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        font-size: 14px;
+        line-height: 1.7;
+      }
+      .newsletter-frame.mobile .nl-footer {
+        grid-template-columns: 1fr;
+      }
+      .nl-footer-title {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        opacity: 0.7;
+        margin-bottom: 12px;
+      }
+      .nl-footer a {
+        color: var(--white);
+        text-decoration: underline;
+      }
+      .nl-copyright {
+        grid-column: 1 / -1;
+        padding-top: 24px;
+        margin-top: 16px;
+        border-top: 1px solid rgba(255, 255, 255, 0.2);
+        font-size: 12px;
+        opacity: 0.7;
+        text-align: center;
+      }
+
+      /* ═══════════════════════════════════════════════════════════
+     FOOTER VITRINE
+     ═══════════════════════════════════════════════════════════ */
+      .vitrine-footer {
+        max-width: 1200px;
+        margin: var(--s-128) auto 0;
+        padding: var(--s-64) var(--s-32);
+        border-top: 1px solid rgba(6, 114, 144, 0.15);
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: var(--s-32);
+        font-size: 14px;
+        color: var(--ink-soft);
+      }
+      @media (max-width: 720px) {
+        .vitrine-footer {
+          grid-template-columns: 1fr;
+        }
+      }
+      .vitrine-footer h4 {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--blue-primary);
+        margin-bottom: var(--s-16);
+      }
+      .vitrine-footer .credit {
+        font-family: var(--f-display);
+        font-style: italic;
+        font-size: 18px;
+        color: var(--ink);
+        margin-bottom: var(--s-8);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ═══════════ NAV ═══════════ -->
+    <nav class="nav-vitrine">
+      <div class="nav-inner">
+        <div class="nav-brand"><span>CSP</span> · Design System Newsletter</div>
+        <div class="nav-links">
+          <a href="#palette">Palette</a>
+          <a href="#typo">Typographie</a>
+          <a href="#spacing">Espacement</a>
+          <a href="#boutons">Boutons</a>
+          <a href="#anatomie">Anatomie</a>
+          <a href="#exemple">Exemple</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ═══════════ HERO ═══════════ -->
+    <header class="hero">
+      <div class="hero-eyebrow">🌞 Guide interne · Équipe Marketing</div>
+      <h1>Le design system des <em>newsletters</em>, en un coup d'œil.</h1>
+      <p class="hero-lead">
+        Un langage visuel commun pour tous les emails Comptoir Sud Pacifique.
+        Cette page rassemble les règles, les composants et un exemple de mise en
+        œuvre — pour produire des newsletters cohérentes, desktop comme mobile,
+        sans s'éparpiller.
+      </p>
+      <div class="hero-meta">
+        <div>
+          <strong>Brand</strong>
+          Comptoir Sud Pacifique
+        </div>
+        <div>
+          <strong>Version</strong>
+          1.0 · Avril 2026
+        </div>
+        <div>
+          <strong>Canal</strong>
+          Email · Klaviyo
+        </div>
+        <div>
+          <strong>Responsive</strong>
+          Desktop + Mobile
+        </div>
+      </div>
+    </header>
+
+    <!-- ═══════════ 1 · PALETTE ═══════════ -->
+    <section class="ds" id="palette">
+      <div class="section-head">
+        <div class="section-num">01</div>
+        <div class="section-title">
+          <h2>Palette chromatique</h2>
+          <p>
+            Quatre couleurs, pas une de plus. Le
+            <strong>blue-primary</strong> porte toute l'identité, les trois
+            autres sont là pour respirer. Cliquez pour copier le hex.
+          </p>
+        </div>
+      </div>
+
+      <div class="palette-grid">
+        <div class="swatch" data-hex="#067290">
+          <div class="swatch-color" style="background: #067290; color: #fff">
+            <span class="on">cliquer pour copier</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">blue-primary</span
+            ><span class="swatch-hex">#067290</span>
+          </div>
+        </div>
+        <div class="swatch" data-hex="#E7F4F7">
+          <div class="swatch-color" style="background: #e7f4f7; color: #067290">
+            <span class="on">cliquer pour copier</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">blue-light</span
+            ><span class="swatch-hex">#E7F4F7</span>
+          </div>
+        </div>
+        <div class="swatch" data-hex="#F7F6F1">
+          <div class="swatch-color" style="background: #f7f6f1; color: #0a2a33">
+            <span class="on">cliquer pour copier</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">off-white</span
+            ><span class="swatch-hex">#F7F6F1</span>
+          </div>
+        </div>
+        <div class="swatch" data-hex="#FFFFFF">
+          <div
+            class="swatch-color"
+            style="
+              background: #ffffff;
+              color: #0a2a33;
+              border-bottom: 1px solid rgba(6, 114, 144, 0.08);
+            "
+          >
+            <span class="on">cliquer pour copier</span>
+          </div>
+          <div class="swatch-meta">
+            <span class="swatch-name">white</span
+            ><span class="swatch-hex">#FFFFFF</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 2 · TYPOGRAPHIE ═══════════ -->
+    <section class="ds" id="typo">
+      <div class="section-head">
+        <div class="section-num">02</div>
+        <div class="section-title">
+          <h2>Typographie</h2>
+          <p>
+            Une seule famille, <strong>Freight Neo Pro</strong>, déclinée en
+            trois rôles. Simple à mémoriser, facile à appliquer dans Klaviyo.
+          </p>
+        </div>
+      </div>
+
+      <div class="type-stack">
+        <div class="type-row">
+          <div class="type-label">
+            Title 1
+            <small>Freight Neo Pro · Bold · 20px</small>
+          </div>
+          <div class="type-sample type-title1">
+            Nouvelle collection : Vanille Coco
+          </div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">
+            Title 2
+            <small>Freight Neo Pro · Bold · 18px</small>
+          </div>
+          <div class="type-sample type-title2">
+            Un souffle d'îles lointaines
+          </div>
+        </div>
+        <div class="type-row">
+          <div class="type-label">
+            Body
+            <small>Freight Neo Pro · Regular · 16px</small>
+          </div>
+          <div class="type-sample type-body">
+            Depuis 1974, Comptoir Sud Pacifique célèbre l'esprit du voyage à
+            travers des parfums inspirés des confins du monde. Née de la
+            fascination pour les îles du Pacifique, la Maison crée des
+            fragrances solaires et sensorielles.
+          </div>
+        </div>
+      </div>
+
+      <div class="type-note">
+        <strong>Note de mise en œuvre</strong> — Cette vitrine utilise
+        <em>Plus Jakarta Sans</em> comme substitut web de Freight Neo Pro (non
+        disponible en Google Font). Dans Klaviyo, charger Freight Neo Pro via
+        l'upload de police officiel de la Maison.
+      </div>
+    </section>
+
+    <!-- ═══════════ 3 · SPACING ═══════════ -->
+    <section class="ds" id="spacing">
+      <div class="section-head">
+        <div class="section-num">03</div>
+        <div class="section-title">
+          <h2>Échelle d'espacement</h2>
+          <p>
+            Toutes les marges et paddings suivent une échelle en
+            <strong>puissances de 2</strong>. En cas de besoin exceptionnel,
+            rester sur un multiple de 2 (ex : 96px).
+          </p>
+        </div>
+      </div>
+
+      <div class="spacing-legend">
+        Règle : <code>8 → 16 → 32 → 64 → 128 → 256 → 512</code> · Multiples de 2
+        autorisés en secours
+      </div>
+
+      <div class="spacing-list">
+        <div class="spacing-row">
+          <div class="spacing-label">8px</div>
+          <div class="spacing-bar-wrap">
+            <div class="spacing-bar" style="width: 1.56%"></div>
+          </div>
+          <div class="spacing-usage">icône · gap serré</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">16px</div>
+          <div class="spacing-bar-wrap">
+            <div class="spacing-bar" style="width: 3.12%"></div>
+          </div>
+          <div class="spacing-usage">padding composant</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">32px</div>
+          <div class="spacing-bar-wrap">
+            <div class="spacing-bar" style="width: 6.25%"></div>
+          </div>
+          <div class="spacing-usage">padding bloc</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">64px</div>
+          <div class="spacing-bar-wrap">
+            <div class="spacing-bar" style="width: 12.5%"></div>
+          </div>
+          <div class="spacing-usage">entre sections</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">128px</div>
+          <div class="spacing-bar-wrap">
+            <div class="spacing-bar" style="width: 25%"></div>
+          </div>
+          <div class="spacing-usage">logo max-height</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">256px</div>
+          <div class="spacing-bar-wrap">
+            <div class="spacing-bar" style="width: 50%"></div>
+          </div>
+          <div class="spacing-usage">hero height mobile</div>
+        </div>
+        <div class="spacing-row">
+          <div class="spacing-label">512px</div>
+          <div class="spacing-bar-wrap">
+            <div class="spacing-bar" style="width: 100%"></div>
+          </div>
+          <div class="spacing-usage">hero height desktop</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 4 · BOUTONS ═══════════ -->
+    <section class="ds" id="boutons">
+      <div class="section-head">
+        <div class="section-num">04</div>
+        <div class="section-title">
+          <h2>Boutons</h2>
+          <p>
+            Deux styles seulement : le <strong>souligné</strong> pour les CTA
+            légers, le <strong>plein</strong> pour les actions principales.
+            Survolez pour voir les états.
+          </p>
+        </div>
+      </div>
+
+      <div class="btn-grid">
+        <div class="btn-card">
+          <h3>Style 1 · Underlined</h3>
+          <button class="btn-underlined">Découvrir la collection</button>
+          <div class="btn-spec">
+            Texte <code>blue-primary</code>, souligné, sans fond.<br />
+            Pour les CTA secondaires ou inline.
+          </div>
+        </div>
+
+        <div class="btn-card">
+          <h3>Style 2 · Filled</h3>
+          <button class="btn-filled">Acheter maintenant</button>
+          <div class="btn-spec">
+            Texte blanc, fond <code>blue-primary</code>,<br />
+            padding interne <code>12px</code> (x et y).
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 5 · ANATOMIE ═══════════ -->
+    <section class="ds" id="anatomie">
+      <div class="section-head">
+        <div class="section-num">05</div>
+        <div class="section-title">
+          <h2>Anatomie d'une newsletter</h2>
+          <p>
+            La structure canonique, de haut en bas. Passez votre souris sur les
+            blocs pour mettre en relation le schéma et les règles.
+          </p>
+        </div>
+      </div>
+
+      <div class="anatomy">
+        <div class="anatomy-visual">
+          <div class="an-block header" data-note="n-header">
+            Header · Logo + Navbar
+          </div>
+          <div class="an-block hero-img" data-note="n-hero-img">
+            Hero image (cliquable)
+          </div>
+          <div class="an-block hero-text" data-note="n-hero-text">
+            Hero text + CTA
+          </div>
+          <div class="an-block module" data-note="n-modules">
+            Modules (wildcards, texte/image)
+          </div>
+          <div class="an-block module" data-note="n-reassurance">
+            Bloc réassurance
+          </div>
+          <div class="an-block module" data-note="n-brand">
+            Paragraphe marque
+          </div>
+          <div class="an-block footer" data-note="n-footer">
+            Footer (2 colonnes)
+          </div>
+        </div>
+
+        <div class="anatomy-notes">
+          <div class="note" id="n-header">
+            <h4>Header</h4>
+            <ul>
+              <li>
+                Logo + navbar, fond
+                <code style="font-family: monospace">blue-primary</code> ou
+                blanc
+              </li>
+              <li>
+                Logo max-height :
+                <code style="font-family: monospace">128px</code>
+              </li>
+              <li>Hauteur respectant l'échelle d'espacement</li>
+            </ul>
+          </div>
+          <div class="note" id="n-hero-img">
+            <h4>Hero image</h4>
+            <ul>
+              <li>Toujours cliquable</li>
+              <li>Avec ou sans accroche textuelle</li>
+              <li>Flèche ou indice UI pour signaler la clickabilité</li>
+            </ul>
+          </div>
+          <div class="note" id="n-hero-text">
+            <h4>Hero text &amp; CTA</h4>
+            <ul>
+              <li>Phrase principale + courte description</li>
+              <li>CTA link : le plus haut possible</li>
+              <li>CTA toujours au-dessus de la ligne de flottaison</li>
+            </ul>
+          </div>
+          <div class="note" id="n-modules">
+            <h4>Modules produits</h4>
+            <ul>
+              <li>Wildcards : nom seul, pas de prix</li>
+              <li>Chaque wildcard = lien direct vers la fiche produit</li>
+              <li>Préférer fonds clairs + packshots</li>
+              <li>Combinaisons texte/image autorisées avec CTA</li>
+            </ul>
+          </div>
+          <div class="note" id="n-reassurance">
+            <h4>Bloc réassurance</h4>
+            <ul>
+              <li>Comme sur le site (livraison offerte, etc.)</li>
+              <li>
+                Icônes : max-height
+                <code style="font-family: monospace">96px</code>
+              </li>
+              <li>Typographie conforme au DS</li>
+            </ul>
+          </div>
+          <div class="note" id="n-brand">
+            <h4>Paragraphe marque</h4>
+            <ul>
+              <li>Logo + texte institutionnel (Depuis 1974…)</li>
+              <li>Placement avant le footer</li>
+            </ul>
+          </div>
+          <div class="note" id="n-footer">
+            <h4>Footer</h4>
+            <ul>
+              <li>Deux colonnes desktop, une sur mobile</li>
+              <li>
+                Texte blanc sur fond
+                <code style="font-family: monospace">blue-primary</code>
+              </li>
+              <li>Gauche : logo, adresse, réseaux</li>
+              <li>Droite : contact + boutique + copyright</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ 6 · EXEMPLE COMPLET ═══════════ -->
+    <section class="ds" id="exemple">
+      <div class="section-head">
+        <div class="section-num">06</div>
+        <div class="section-title">
+          <h2>Exemple complet</h2>
+          <p>
+            Tous les composants assemblés dans une newsletter fictive. Basculez
+            entre desktop et mobile pour valider le responsive.
+          </p>
+        </div>
+      </div>
+
+      <div class="device-switch" role="tablist">
+        <button class="active" data-device="desktop">Desktop</button>
+        <button data-device="mobile">Mobile</button>
+      </div>
+
+      <div class="newsletter-frame desktop" id="nlFrame">
+        <!-- Header -->
+        <div class="nl-header">
+          <div class="nl-logo">Comptoir Sud Pacifique</div>
+          <div class="nl-nav">
+            <span>Parfums</span><span>Maison</span><span>Boutique</span>
+          </div>
+        </div>
+
+        <!-- Hero image -->
+        <div class="nl-hero-image">LA COLLECTION SOLAIRE · PRINTEMPS 2026</div>
+
+        <!-- Hero text + CTA -->
+        <div class="nl-hero-text">
+          <h1>Un souffle de Pacifique dans votre parfumerie</h1>
+          <p>
+            Trois nouvelles fragrances pour accompagner le retour du soleil.
+            Vanille Coco, Tiaré Bloom et Sel d'Hibiscus vous attendent en
+            boutique et en ligne.
+          </p>
+          <button class="btn-filled">Découvrir la collection</button>
+        </div>
+
+        <!-- Wildcards produits -->
+        <div class="nl-wildcards">
+          <div class="nl-wildcard">
+            <div class="nl-wildcard-img"><span>Vanille Coco</span></div>
+            <div class="nl-wildcard-name">Vanille Coco</div>
+          </div>
+          <div class="nl-wildcard">
+            <div class="nl-wildcard-img"><span>Tiaré</span></div>
+            <div class="nl-wildcard-name">Tiaré Bloom</div>
+          </div>
+          <div class="nl-wildcard">
+            <div class="nl-wildcard-img"><span>Hibiscus</span></div>
+            <div class="nl-wildcard-name">Sel d'Hibiscus</div>
+          </div>
+        </div>
+
+        <!-- Module combo texte + image -->
+        <div class="nl-module-combo">
+          <div class="nl-module-img"></div>
+          <div class="nl-module-text">
+            <h2>L'art du sillage solaire</h2>
+            <p>
+              Notre parfumeuse Éléonore a voyagé trois mois dans les îles du
+              Pacifique pour capturer l'essence de cette collection. Un carnet
+              de voyage à lire, une odyssée à sentir.
+            </p>
+            <button class="btn-underlined">Lire le journal →</button>
+          </div>
+        </div>
+
+        <!-- Réassurances -->
+        <div class="nl-reassurances">
+          <div class="nl-reassurance">
+            <div class="icon">✦</div>
+            <p>Livraison offerte dès 80€</p>
+          </div>
+          <div class="nl-reassurance">
+            <div class="icon">◎</div>
+            <p>Échantillons offerts</p>
+          </div>
+          <div class="nl-reassurance">
+            <div class="icon">☉</div>
+            <p>Fabriqué en France</p>
+          </div>
+        </div>
+
+        <!-- Brand paragraph -->
+        <div class="nl-brand">
+          <div class="nl-brand-logo">Comptoir Sud Pacifique</div>
+          <p>
+            Depuis 1974, Comptoir Sud Pacifique célèbre l'esprit du voyage à
+            travers des parfums inspirés des confins du monde. Née de la
+            fascination pour les îles du Pacifique et leurs matières premières
+            envoûtantes, la Maison crée des fragrances solaires et sensorielles
+            qui invitent à l'évasion et réveillent les souvenirs.
+          </p>
+        </div>
+
+        <!-- Footer -->
+        <div class="nl-footer">
+          <div>
+            <div class="nl-footer-title">Maison</div>
+            <strong>Comptoir Sud Pacifique</strong><br />
+            34 Place du Marché Saint-Honoré<br />
+            75001 Paris<br /><br />
+            Instagram · Facebook · Pinterest
+          </div>
+          <div>
+            <div class="nl-footer-title">Contact &amp; Boutiques</div>
+            <a href="mailto:contact@comptoir-sud-pacifique.com"
+              >contact@comptoir-sud-pacifique.com</a
+            ><br />
+            +33 (0)1 44 86 07 81<br /><br />
+            30 rue Saint-Roch, 75001 Paris<br />
+            <em>Opening soon</em> · rue du Cherche Midi, 75006 Paris
+          </div>
+          <div class="nl-copyright">Comptoir Sud Pacifique © 2026</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ FOOTER VITRINE ═══════════ -->
+    <footer class="vitrine-footer">
+      <div>
+        <div class="credit">Design System Newsletter v1.0</div>
+        <p>
+          Document vivant à mettre à jour à chaque évolution. Pour toute
+          question sur l'application des règles, se référer à la page Notion
+          "Guide Newsletter".
+        </p>
+      </div>
+      <div>
+        <h4>Source</h4>
+        <p>Notion · Documentation ↗<br />Guide Newsletter</p>
+      </div>
+      <div>
+        <h4>Maintainer</h4>
+        <p>Équipe Digital &amp; Brand<br />Comptoir Sud Pacifique</p>
+      </div>
+    </footer>
+
+    <script>
+      /* — Copy hex au clic sur un swatch — */
+      document.querySelectorAll(".swatch").forEach((el) => {
+        el.addEventListener("click", async () => {
+          const hex = el.dataset.hex;
+          try {
+            await navigator.clipboard.writeText(hex);
+            el.dataset.copied = "true";
+            setTimeout(() => {
+              delete el.dataset.copied;
+            }, 1500);
+          } catch (e) {
+            /* silencieux */
+          }
+        });
+      });
+
+      /* — Anatomie : lien survol visuel ↔ notes — */
+      document.querySelectorAll(".an-block").forEach((block) => {
+        block.addEventListener("mouseenter", () => {
+          const id = block.dataset.note;
+          document
+            .querySelectorAll(".note")
+            .forEach((n) => (n.style.background = ""));
+          const note = document.getElementById(id);
+          if (note) note.style.background = "var(--blue-light)";
+        });
+        block.addEventListener("mouseleave", () => {
+          document
+            .querySelectorAll(".note")
+            .forEach((n) => (n.style.background = ""));
+        });
+      });
+
+      /* — Switch desktop / mobile sur l'exemple — */
+      const frame = document.getElementById("nlFrame");
+      document.querySelectorAll(".device-switch button").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          document
+            .querySelectorAll(".device-switch button")
+            .forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+          frame.className = "newsletter-frame " + btn.dataset.device;
+        });
+      });
+    </script>
+  </body>
+</html>

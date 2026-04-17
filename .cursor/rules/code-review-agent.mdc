@@ -1,0 +1,40 @@
+---
+description: Standardise les reviews agent (findings, severite, preuves, checks)
+alwaysApply: true
+---
+
+# Code Review Agent Rule
+
+Applique cette regle pour toute demande de review/analyse de code.
+
+## Source de reference
+
+- Lire et suivre: `docs/agent_code_review_guide.md`
+
+## Exigences minimales
+
+1. Prioriser les risques produit et regressions avant le style.
+2. Classer chaque finding par severite: `critical`, `high`, `medium`, `low`.
+3. Appuyer chaque finding sur une preuve concrete (code, logs, sorties de commandes).
+4. Inclure le chemin de fichier exact pour chaque finding.
+5. Proposer une correction actionnable pour chaque finding.
+
+## Format de reponse impose
+
+1. `Findings` (ordre: severite decroissante)
+2. `Questions / Hypotheses`
+3. `Resume secondaire` (2-4 bullets max)
+
+Si aucun probleme:
+
+- Ecrire explicitement: `Aucun probleme bloquant detecte.`
+- Mentionner risques residuels + manques de tests.
+
+## Verification
+
+Executer ou verifier les commandes pertinentes (au minimum):
+
+- `npm run lint`
+- `npm run build`
+
+Si non executable, l'indiquer explicitement dans la reponse.

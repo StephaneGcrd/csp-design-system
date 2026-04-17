@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Local worktrees and ad-hoc review folders can contain generated builds.
+    ".worktrees/**",
+    ".tmp-review-*/**",
   ]),
 ]);
 
