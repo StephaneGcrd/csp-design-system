@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { BrandGuideIntro } from "@/components/brand/BrandGuideIntro";
 import { ManifesteGallery } from "@/components/brand/ManifesteGallery";
 
@@ -6,6 +7,36 @@ const h2 =
   "mb-4 mt-16 text-3xl font-semibold tracking-tight text-blue-primary first:mt-0 sm:text-4xl";
 const h3 =
   "mb-3 mt-10 text-xl font-semibold tracking-tight text-blue-primary sm:text-2xl";
+
+const MOODBOARD_SRC =
+  "/brands/comptoir-sud-pacifique/moodboard-plateforme-marque.png";
+
+function BrandPlatformMoodboard() {
+  return (
+    <section
+      className="mx-auto w-full max-w-6xl px-4 pb-16 sm:px-8"
+      aria-labelledby="brand-platform-moodboard-title"
+    >
+      <p
+        id="brand-platform-moodboard-title"
+        className="mb-4 text-xs font-semibold tracking-[0.14em] text-blue-primary uppercase"
+      >
+        Moodboard
+      </p>
+      <figure className="m-0 overflow-hidden">
+        <Image
+          src={MOODBOARD_SRC}
+          alt="Moodboard de direction artistique : paysages tropicaux, matières premières, eau et univers Comptoir Sud Pacifique."
+          width={1024}
+          height={724}
+          className="h-auto w-full"
+          priority
+          sizes="(max-width: 600px) 100vw, 1152px"
+        />
+      </figure>
+    </section>
+  );
+}
 
 function ManifesteSection() {
   return (
@@ -410,6 +441,7 @@ export function BrandPlatformGuidePage() {
           </>
         }
       />
+      <BrandPlatformMoodboard />
       <ManifesteSection />
     </div>
   );
