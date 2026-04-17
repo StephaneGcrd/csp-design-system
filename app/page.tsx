@@ -1,5 +1,6 @@
-import { NewsletterGuidePage } from "@/components/newsletter/NewsletterGuidePage";
+import { redirect } from "next/navigation";
+import { getDefaultDesignSystem } from "@/components/systems/designSystems";
 
 export default function Home() {
-  return <NewsletterGuidePage />;
+  redirect(`/systems/${getDefaultDesignSystem().slug}`);
 }

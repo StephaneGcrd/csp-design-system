@@ -1,51 +1,8 @@
-import Image from "next/image";
 import { AnatomyMap } from "./AnatomyMap";
 import { ExampleNewsletter } from "./ExampleNewsletter";
 import { PaletteGrid } from "./PaletteGrid";
 import { SectionHeader } from "./SectionHeader";
 import { spacingScale } from "./data";
-
-function Nav() {
-  const links = [
-    ["palette", "Palette"],
-    ["typo", "Typographie"],
-    ["spacing", "Espacement"],
-    ["boutons", "Boutons"],
-    ["anatomie", "Anatomie"],
-    ["exemple", "Exemple"],
-  ] as const;
-
-  return (
-    <nav className="sticky top-0 z-50 border-b border-blue-primary/10 bg-off-white/90 backdrop-blur">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-4 py-4 sm:px-8">
-        <div className="flex items-center gap-3">
-          <Image
-            src="/logo_vec.svg"
-            alt="Comptoir Sud Pacifique"
-            width={144}
-            height={28}
-            className="h-7 w-auto"
-            priority
-          />
-          <span className="text-sm font-medium text-blue-primary">
-            Design System Newsletter
-          </span>
-        </div>
-        <div className="hidden gap-8 text-sm font-medium text-blue-primary md:flex">
-          {links.map(([href, label]) => (
-            <a
-              key={href}
-              href={`#${href}`}
-              className="transition hover:text-blue-primary"
-            >
-              {label}
-            </a>
-          ))}
-        </div>
-      </div>
-    </nav>
-  );
-}
 
 function Hero() {
   return (
@@ -88,7 +45,6 @@ function Hero() {
 export function NewsletterGuidePage() {
   return (
     <div className="bg-white text-blue-primary">
-      <Nav />
       <Hero />
 
       <SectionHeader

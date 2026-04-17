@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Fraunces, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import "remixicon/fonts/remixicon.css";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-geist-sans",
@@ -18,8 +19,8 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
-  title: "Design System Newsletter · Comptoir Sud Pacifique",
-  description: "Guide newsletter design system for CSP marketing team.",
+  title: "Design Systems · Comptoir Sud Pacifique",
+  description: "Guides modulaires newsletter, web et futurs canaux design system.",
 };
 
 const useTypekit = process.env.NEXT_PUBLIC_ENABLE_TYPEKIT === "true";
